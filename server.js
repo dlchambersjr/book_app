@@ -28,7 +28,10 @@ app.post('/searches', bookResults);
 
 
 //Set the catch all route
-app.get('*', (request, response) => response.status(404).send(`"This is not the route your looking for..." becasue it's not found`));
+// app.get('*', (request, response) => response.status(404).send(`"This is not the route your looking for..." becasue it's not found`));
+
+//Set the catch all route
+app.get('*', (request, response) => response.status(404).render('pages/404-error.ejs'));
 
 // Activate the server
 app.listen(PORT, () => console.log(`(Lab-11) listening on: ${PORT}`));
@@ -62,6 +65,7 @@ function bookResults(request, response) {
     .then(bookList => {
       console.log(typeof bookList);
       console.log(bookList);
-      response.render('pages/searches/show', {books: bookList});
+      response.render('pages/searches/show', { books: bookList });
     })
+    .catch(error => response.render('pages/error', { errorResult: error }));
 }
