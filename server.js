@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // Routes to listen for:
-app.get('/hello', hello);
+app.get('/', newSearch);
 
 
 
@@ -34,6 +34,6 @@ app.get('*', (request, response) => response.status(404).send(`"This is not the 
 // Activate the server
 app.listen(PORT, () => console.log(`(Lab-11) listening on: ${PORT}`));
 
-function hello(request, response) {
+function newSearch(request, response) {
   response.render('index');
 }
