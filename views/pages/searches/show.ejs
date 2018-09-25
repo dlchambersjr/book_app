@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1>Google API Book Results</h1>
+        <ul>
+            <% books.forEach(book => { %>
+                <p><img src="<%=book.image_url%>"></p>
+                <p>Title: <%= book.title %></p>
+                <p>Author: <%= book.author %></p>
+
+            <% }) %>
+
+
+        </ul>
+
+
+
+
+    </body>
+</html>
