@@ -23,6 +23,19 @@ This project uses the following technologies:
 * postgres: ```npm i pg ```
 * Deployed live on Heroku at 
 
+### Database SCHEMA
+
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR (255),
+  author VARCHAR(255),
+  isbn VARCHAR(20),
+  image_url VARCHAR(255),
+  description TEXT,
+  bookshelf VARCHAR(25)
+);
+
+
 ## Change Log
 
 09-25-2018 (DC) - Set-up repository and inital scaffolding
