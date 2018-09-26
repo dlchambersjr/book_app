@@ -31,41 +31,39 @@ client.on('error', err => console.error(err));
 // Tell express to use EJS files
 app.set('view engine', 'ejs');
 
-// Routes to listen for:
+// ++++++++++++++++
+// Routes to listen
+// ++++++++++++++++
+
+// index.ejs
 app.get('/', startApp);
+
+// Book Details BUtton
+app.get('/book/:id', bookDetails);
+
+// Search Request
 app.get('/new', newSearch);
+app.post('/searches', searchResults);
 
-app.post('/searches', bookResults);
+// Add Books to the database
+app.post('/add', addBook);
 
 
-//Set the catch all route
-// app.get('*', (request, response) => response.status(404).send(`"This is not the route your looking for..." becasue it's not found`));
+
 
 //Set the catch all route
 app.get('*', (request, response) => response.status(404).render('pages/404-error.ejs'));
 
 // Activate the server
-app.listen(PORT, () => console.log(`(Lab-11) listening on: ${PORT}`));
-
-function startApp(request, response) {
-
-  const SQL = 'SELECT * FROM books;';
-  return client.query(SQL)
-    .then(books => {
-      console.log(typeof books);
-      console.log(books);
-      response.render('index', { bookList: books.rows });
-    })
-
-}
+app.listen(PORT, () => console.log(`(Book-App) listening on: ${PORT}`));
 
 
+// +++++++++++++++++++++++++++++++++
+// Helper functions
+// +++++++++++++++++++++++++++++++++
 
-function newSearch(request, response) {
-  response.render('pages/searches/new');
-}
 
-// Helper Functions
+// Constructor to build our book instances
 function Book(info) {
   const placeholderImage = 'http://www.newyorkpaddy.com/images/covers/NoCoverAvailable.jpg';
 
@@ -76,8 +74,23 @@ function Book(info) {
   this.description = info.description;
 }
 
+// retrives the books from the database and renders to indexedDB.ejs
+function startApp(request, response) {
+  const SQL = 'SELECT * FROM books;';
+  return client.query(SQL)
+    .then(books => {
+      console.log(typeof books);
+      console.log(books);
+      response.render('index', { bookList: books.rows });
+    })
+}
 
-function bookResults(request, response) {
+//Search for a book on Google Books
+function newSearch(request, response) {
+  response.render('pages/searches/new');
+}
+
+function searchResults(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   console.log(request.body);
@@ -93,5 +106,35 @@ function bookResults(request, response) {
     .then(bookList => {
       response.render('pages/searches/show', { books: bookList });
     })
-    .catch(error => response.render('pages/error', { errorResult: error }));
+    .catch(processErrors);
 }
+
+// Retrieve the details of a book
+function bookDetails(request, response) {
+  const SQL = 'SELECT * FROM books WHERE id=$1;';
+  const values = [request.params.book.id];
+
+  client.query(SQL, values)
+    .then(result => response.render('pages/books/details', { book: result.rows[0] }))
+    .catch(processErrors);
+}
+
+//Add a book to the database
+function addBook(request, response) {
+  let { title, author, isbn, image_url, description, bookshelf } = request.body;
+
+  const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUE ($1, $2, $3, $4, $5, $6);';
+  const values = [title, author, isbn, image_url, description, bookshelf];
+
+  return client.query(SQL, values)
+    .then(response.redirect('/'))
+    .then(bookDetails)
+    .catch(processErrors);
+}
+
+// Error Handler
+function processErrors(error, response) {
+  response.render('pages/error', { errorResult: error })
+}
+
+
