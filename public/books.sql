@@ -9,3 +9,18 @@ CREATE TABLE books (
   description TEXT,
   bookshelf VARCHAR(25)
 );
+
+INSERT INTO books
+(title, author, description, bookshelf)
+VALUES (
+  'Sequels',
+  'Them',
+  'A great story about databases',
+  'Coding'
+);
+
+INSERT INTO books
+(image_url)
+VALUES (
+  'https://i.imgur.com/J5LVHEL.jpg'
+);

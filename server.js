@@ -7,6 +7,10 @@
 //Required Dependencies
 const express = require('express');
 const superagent = require('superagent');
+const pg = require('pg');
+
+require('dotenv').config();
+
 
 //Create an instance of express in the variable app
 const app = express();
@@ -18,11 +22,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+//Start database connection
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+
+client.on('error', err => console.error(err));
+
 // Tell express to use EJS files
 app.set('view engine', 'ejs');
 
 // Routes to listen for:
-app.get('/', newSearch);
+app.get('/', startApp);
+app.get('/new', newSearch);
 
 app.post('/searches', bookResults);
 
@@ -36,8 +47,22 @@ app.get('*', (request, response) => response.status(404).render('pages/404-error
 // Activate the server
 app.listen(PORT, () => console.log(`(Lab-11) listening on: ${PORT}`));
 
+function startApp(request, response) {
+
+  const SQL = 'SELECT * FROM books;';
+  return client.query(SQL)
+    .then(books => {
+      console.log(typeof books);
+      console.log(books);
+      response.render('index', { bookList: books.rows });
+    })
+
+}
+
+
+
 function newSearch(request, response) {
-  response.render('index');
+  response.render('pages/searches/new');
 }
 
 // Helper Functions
@@ -46,7 +71,7 @@ function Book(info) {
 
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author available';
-  this.isbn = info.industryIdentifiers[1].identifier || 'No ISBN available';
+  this.isbn = info.industryIdentifiers ? info.industryIdentifiers[1].indentifier : 'No ISBN available';
   this.image_url = info.imageLinks.thumbnail || placeholderImage;
   this.description = info.description;
 }
