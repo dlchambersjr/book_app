@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <%- include('../../layout/head') %>
 
-  <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
-  <link rel="stylesheet" type="text/css" href="/styles/base.css" />
-  <!-- <link rel="stylesheet" type="text/css" href="../public/styles/layout.css" />
-      <link rel="stylesheet" type="text/css" href="../public/styles/modules.css" />
-      <link rel="stylesheet" type="text/css" href="../public/styles/icons.css" /> -->
-
-</head>
 
 <body>
   <h1>Google API Book Results</h1>
-  <ul>
     <% books.forEach(book => { %>
+      <div>
     <p><img src="<%=book.image_url%>"></p>
     <p>Title:
       <%= book.title %>
@@ -28,11 +21,8 @@
     <p>Description:
       <%= book.description %>
     </p>
-
+   </div>
     <% }) %>
-
-
-  </ul>
 
 
 
