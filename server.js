@@ -46,7 +46,9 @@ function Book(info) {
 
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author available';
+  this.isbn = info.industryIdentifiers[1].identifier || 'No ISBN available';
   this.image_url = info.imageLinks.thumbnail || placeholderImage;
+  this.description = info.description;
 }
 
 
@@ -60,11 +62,10 @@ function bookResults(request, response) {
   console.log(url);
   superagent.get(url)
     .then(bookList => bookList.body.items.map(book => {
+      console.log(book.volumeInfo.industryIdentifiers[1]);
       return new Book(book.volumeInfo);
     }))
     .then(bookList => {
-      console.log(typeof bookList);
-      console.log(bookList);
       response.render('pages/searches/show', { books: bookList });
     })
     .catch(error => response.render('pages/error', { errorResult: error }));
