@@ -6,24 +6,27 @@
 
 <body>
   <h1>Google API Book Results</h1>
+  <ul>
     <% books.forEach(book => { %>
-      <div>
-    <p><img src="<%=book.image_url%>"></p>
+      <li>
+    <p><img src="<%-book.image_url%>"></p>
     <p>Title:
-      <%= book.title %>
+      <%- book.title %>
     </p>
     <p>Author:
-      <%= book.author %>
+      <%- book.author %>
     </p>
     <p>ISBN:
-      <%= book.isbn %>
+      <%- book.isbn %>
     </p>
     <p>Description:
-      <%= book.description %>
+      <%- book.description %>
     </p>
-   </div>
+    <button id="<%- book.isbn %>">Select This Book</button>
+    <%- include('edit',{book}) %>
+  </li>
     <% }) %>
-
+  </ul>
 
 
 
