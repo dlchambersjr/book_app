@@ -79,8 +79,6 @@ function startApp(request, response) {
   const SQL = 'SELECT * FROM books;';
   return client.query(SQL)
     .then(books => {
-      console.log(typeof books);
-      console.log(books);
       response.render('index', { bookList: books.rows });
     })
 }
@@ -127,17 +125,11 @@ function addBook(request, response) {
 
   let { title, author, isbn, image_url, description, bookshelf } = request.body;
 
-  const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   const values = [title, author, isbn, image_url, description, bookshelf];
 
-  console.log('+++++++++++++++++++\n\n');
-  console.log(SQL);
-  console.log('\n\n+++++++++++++++++++');
-
-
   return client.query(SQL, values)
-    .then(response.redirect('/'))
-    .then(bookDetails)
+    .then(result => response.redirect(`/book/${result.rows[0].id}`))
     .catch(err => processErrors(err, response));
 }
 
