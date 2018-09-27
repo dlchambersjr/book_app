@@ -50,6 +50,11 @@ CREATE TABLE books (
 09-26-2018 @ 12:45pm (DC) - Inital stucture and coding for details and add app.get processes
 09-26-2018 @ 1:30pm (AF/RM) - Structured pages to include via EJS, worked on design of details.ejs.
 
+9-27-2018 @ 9:50am (DC/AF/RM) - Structures our books/show page to pull information from SQL
+9-27-2018 @ : () 
+9-27-2018 @ : ()
+9-27-2018 @ : ()
+
 
 ## Credits and Collaborations
 * Front end starter code provided by Samm Hamm and Allie Grampa

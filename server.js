@@ -69,7 +69,7 @@ function Book(info) {
 
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author available';
-  this.isbn = info.industryIdentifiers ? info.industryIdentifiers[1].indentifier : 'No ISBN available';
+  this.isbn = (info.industryIdentifiers[0].identifier.length < 13 ) ? info.industryIdentifiers[1].identifier : info.industryIdentifiers[0].identifier || 'No ISBN available';
   this.image_url = info.imageLinks.thumbnail || placeholderImage;
   this.description = info.description;
 }
@@ -123,6 +123,8 @@ function bookDetails(request, response) {
 
 //Add a book to the database
 function addBook(request, response) {
+  console.log('ADD BUTTON CLICKED!');
+
   let { title, author, isbn, image_url, description, bookshelf } = request.body;
 
   const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUE ($1, $2, $3, $4, $5, $6);';
