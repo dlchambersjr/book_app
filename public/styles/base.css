@@ -59,6 +59,10 @@ footer {
     width:100%;
 }
 
+.hide-me {
+  display: none;
+}
+
 @media (min-width: 759px){
 
 }

@@ -22,14 +22,14 @@
     <p>Description:
       <%- book.description %>
     </p>
-    <button id="<%- book.isbn %>">Select This Book</button>
+    <button class="select-button" id="<%- book.isbn %>">Select This Book</button>
     <%- include('edit',{book}) %>
   </li>
     <% }) %>
   </ul>
 
 
-
+<%- include('../../layout/footer') %>
 </body>
 
 </html>
