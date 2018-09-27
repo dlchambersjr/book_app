@@ -4,6 +4,10 @@ html {
 
 body{
   background-color: #254e58;
+  color:white;
+  font-size: 200%;
+  display:grid;
+  justify-content: center;
 }
 
 #body {

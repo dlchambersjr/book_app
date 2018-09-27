@@ -111,11 +111,13 @@ function searchResults(request, response) {
 
 // Retrieve the details of a book
 function bookDetails(request, response) {
+  console.log('DETAILS BUTTON CLICKED!');
+
   const SQL = 'SELECT * FROM books WHERE id=$1;';
-  const values = [request.params.book.id];
+  const values = [request.params.id];
 
   client.query(SQL, values)
-    .then(result => response.render('pages/books/details', { book: result.rows[0] }))
+    .then(result => response.render('pages/books/show', { bookList: result.rows[0] }))
     .catch(processErrors);
 }
 

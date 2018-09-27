@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+<%- include('../../layout/head') %>
+
+<body>
+  <%- include('../../layout/header')%>
+
+
+  <ul>
+    <li>
+      <p><img src="<%=bookList.image_url%>"></p>
+
+      <p>Title:
+        <%- bookList.title %>
+      </p>
+
+      <p>Author:
+        <%- bookList.author %>
+      </p>
+
+      <%- include('details')%>
+      </p>
+
+    </li>
+
+  </ul>
+
+
+  <%- include('../../layout/footer')%>
+
+</body>
+
+</html>

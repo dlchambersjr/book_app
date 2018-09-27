@@ -1,10 +1,15 @@
-        <section class="detail-view container">
-                <div id="<%= bookList[0].id %>">
-                  <p>ISBN:
-                    <%= bookList[0].isbn %>
-                  </p>
-                  <p>Description:
-                    <%= bookList[0].description %>
-                  </p>
-                </div>
-        </section>
+<section class="detail-view container">
+
+  <div id="<%= bookList.id %>">
+
+    <p>Description:
+      <%- bookList.description %>
+    </p>
+
+    <p>ISBN:
+      <%- bookList.isbn %>
+    </p>
+
+
+  </div>
+</section>
