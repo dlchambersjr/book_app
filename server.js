@@ -106,7 +106,7 @@ function searchResults(request, response) {
     .then(bookList => {
       response.render('pages/searches/show', { books: bookList });
     })
-    .catch(processErrors);
+    .catch(err => processErrors(err, response));
 }
 
 // Retrieve the details of a book
@@ -118,7 +118,7 @@ function bookDetails(request, response) {
 
   client.query(SQL, values)
     .then(result => response.render('pages/books/show', { bookList: result.rows[0] }))
-    .catch(processErrors);
+    .catch(err => processErrors(err, response));
 }
 
 //Add a book to the database
@@ -127,13 +127,18 @@ function addBook(request, response) {
 
   let { title, author, isbn, image_url, description, bookshelf } = request.body;
 
-  const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUE ($1, $2, $3, $4, $5, $6);';
+  const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   const values = [title, author, isbn, image_url, description, bookshelf];
+
+  console.log('+++++++++++++++++++\n\n');
+  console.log(SQL);
+  console.log('\n\n+++++++++++++++++++');
+
 
   return client.query(SQL, values)
     .then(response.redirect('/'))
     .then(bookDetails)
-    .catch(processErrors);
+    .catch(err => processErrors(err, response));
 }
 
 // Error Handler
