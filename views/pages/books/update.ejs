@@ -1,0 +1,9 @@
+<form class="hide-me" action="_method" method="PUT" id="<%- bookList.isbn %>"" required>
+    <input type="text" name="title" value="<%- bookList.title %>" placeholder="Title" required>
+    <input type="text" name="author" value="<%- bookList.author %>" placeholder="Author" required>
+    <input type="text" name="isbn" value="<%- bookList.isbn %>" placeholder="ISBN" required>
+    <input type="text" name="image_url" value="<%- bookList.image_url %>" placeholder="Image URL" required>
+    <textarea name="description" value="<%- bookList.description %>" placeholder="Description" cols="30" rows="10" required><%- bookList.description %>"</textarea>
+    <input type="text" name="bookshelf" value="<%- bookList.bookshelf %>" placeholder="Bookshelf Name" required>
+    <button type="submit" formAction='update' method= >Update Database</button>
+  </form>
