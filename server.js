@@ -49,7 +49,7 @@ app.post('/searches', searchResults);
 app.post('/add', addBook);
 
 // Update Books in database
-app.put('/book/:id', updateBook);
+app.post('/update', updateBook);
 
 
 //Set the catch all route
