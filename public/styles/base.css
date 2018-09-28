@@ -7,14 +7,28 @@ body{
   color:white;
   font-size: 200%;
   display:grid;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-#body {
+a:link, a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+a:active, a:hover {
+  text-decoration: underline;
+}
+
+#content {
   min-height: 100%;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 75px;  
+  grid-template-rows: 35px 35px;
+  justify-items: center;
+}
+
+.books{
+  margin-bottom: 50px; 
 }
 
 form {
@@ -23,9 +37,7 @@ form {
   font-size: 20px;
   display: grid;
   grid-row-gap: 20px;
-  margin-top: 50px;
   padding: 20px;
-  /* outline: 2px dashed red; */
   color: #666666;
   background-color: #254e58; 
 }
@@ -58,6 +70,8 @@ footer {
     right: 0;
     width:100%;
 }
+
+
 
 .hide-me {
   display: none;
