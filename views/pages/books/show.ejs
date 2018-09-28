@@ -12,8 +12,9 @@
   <ul>
     <li>
       <p><img src="<%=bookList.image_url%>"></p>
-      <button class="select-button" id="<%- bookList.isbn %>">Update This Book</button>
-      <%- include('update') %>
+      <button class="select-button" id="<%- bookList.isbn %>">UPDATE This Book</button>
+      <%- include('update',{bookList}) %>
+      <button class="delete">Delete This Book</button>
 
       <p>Title:
         <%- bookList.title %>

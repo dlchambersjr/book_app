@@ -8,6 +8,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || 3000;
 // Tell the server to get files from the public folder
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+// app.use(methodOverride('X-HTTP-Method-Override'));
 
 //Start database connection
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -30,6 +32,16 @@ client.on('error', err => console.error(err));
 
 // Tell express to use EJS files
 app.set('view engine', 'ejs');
+
+// Method Override
+app.use(methodOverride((request, response) => {
+  if (request.body && typeof request.body === 'object' && '_method' in request.body) {
+    // look in urlencoded POST bodies and delete it
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}))
 
 // ++++++++++++++++
 // Routes to listen
@@ -49,7 +61,7 @@ app.post('/searches', searchResults);
 app.post('/add', addBook);
 
 // Update Books in database
-app.put('/book/:id', updateBook);
+app.put('/update/:id', updateBook);
 
 
 //Set the catch all route
@@ -110,7 +122,7 @@ function searchResults(request, response) {
 
 // Retrieve the details of a book
 function bookDetails(request, response) {
-  console.log('DETAILS BUTTON CLICKED!');
+  console.log('DETAIL SECTION STARTED!');
 
   const SQL = 'SELECT * FROM books WHERE id=$1;';
   const values = [request.params.id];
@@ -138,12 +150,17 @@ function addBook(request, response) {
 function updateBook(request, response) {
   console.log('UPDATE BUTTON CLICKED');
 
-  let { title, author, isbn, image_url, description, bookshelf } = request.body;
-  const SQL = '';
-  const values = [title, author, isbn, image_url, description, bookshelf];
+  let {title, author, isbn, image_url, description, bookshelf } = request.body;
+  const SQL = 'UPDATE books SET title=$1, author=$2, image_url=$3, isbn=$4, description=$5, bookshelf=$6 WHERE id=$7 RETURNING id;';
+  const values = [title, author, isbn, image_url, description, bookshelf, request.params.id];
+  console.log('++++++++++++++++++++++++++');
+  console.log(values);
+  console.log('++++++++++++++++++++++++++');
 
-  return client.query(SQL, values)
-    .then(result => response.redirect('/'))
+
+  client.query(SQL, values)
+    .then(result => response.redirect(`/book/${result.rows[0].id}`))
+  // // .then(console.log(values))
     .catch(err => processErrors(err, response));
 }
 
