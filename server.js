@@ -48,7 +48,8 @@ app.post('/searches', searchResults);
 // Add Books to the database
 app.post('/add', addBook);
 
-
+// Update Books in database
+app.put('/book/:id', updateBook);
 
 
 //Set the catch all route
@@ -132,6 +133,21 @@ function addBook(request, response) {
     .then(result => response.redirect(`/book/${result.rows[0].id}`))
     .catch(err => processErrors(err, response));
 }
+
+//Update a books details to the database
+function updateBook(request, response) {
+  console.log('UPDATE BUTTON CLICKED');
+
+  let { title, author, isbn, image_url, description, bookshelf } = request.body;
+  const SQL = '';
+  const values = [title, author, isbn, image_url, description, bookshelf];
+
+  return client.query(SQL, values)
+    .then(result => response.redirect('/'))
+    .catch(err => processErrors(err, response));
+}
+
+
 
 // Error Handler
 function processErrors(error, response) {

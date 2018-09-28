@@ -48,7 +48,7 @@ span {
   background-color: #88BDBC;
 }
 
-footer {
+/* footer {
   height: 50px;
   display: grid;
   grid-template-columns: 100%;
@@ -57,7 +57,7 @@ footer {
     bottom: 0;
     right: 0;
     width:100%;
-}
+} */
 
 .hide-me {
   display: none;
