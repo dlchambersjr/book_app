@@ -6,9 +6,11 @@
 <body>
 
   <%- include('layout/header') %>
+
   <div id="content">
-    <%- include('layout/nav-bar') %>
-    <h2><%- bookList.length %> Saved Books</h2>
+
+    <h2>
+      <%- bookList.length %> Saved Books</h2>
   </div>
 
   <% bookList.forEach(book => { %>

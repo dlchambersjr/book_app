@@ -1,0 +1,72 @@
+/* MOBILE SCREEN */
+
+@media screen and (max-width: 479px) {
+
+
+
+
+a:link, a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a:active, a:hover {
+  text-decoration: underline;
+}
+
+#content {
+  
+}
+
+.books{
+  /* margin-bottom: 50px;  */
+}
+
+form {
+  
+  
+  
+  /* padding: 20px; */
+
+   
+}
+
+h1 {
+  /* text-align: center; */
+  
+
+input, button {
+  /* font-size: 15px; */
+}
+
+span {
+  /* outline: 1px solid #112D32;
+  padding: 5px 20px;
+  background-color: #88BDBC; */
+}
+
+footer {
+  height: 50px;
+  /* display: grid;
+  grid-template-columns: 100%;
+  background-color: #112D32; */
+  /* position: fixed;
+    bottom: 0;
+    right: 0;
+    width:100%;
+} */
+
+.hide-me {
+  display: none;
+}
+
+
+
+
+}
+
+
+/* TABLET AND DESKTOP */
+@media screen and (min-width: 480px) {
+
+}
