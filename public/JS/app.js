@@ -1,6 +1,13 @@
 'use strict';
-console.log('app.js');
-$('.select-button').on('click', function() {
-  console.log('test');
+
+// Monitor the select buttons
+$('.select-button').on('click', function () {
   $(this).next().removeClass('hide-me');
 });
+
+// // Monitor Delete buttons
+// $('delete').on('click', function(event) {
+//   $.ajax({
+//     url:/delete/
+//   })
+// })
