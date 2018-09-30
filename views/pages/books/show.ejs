@@ -14,7 +14,11 @@
       <p><img src="<%=bookList.image_url%>"></p>
       <button class="select-button" id="<%- bookList.isbn %>">UPDATE This Book</button>
       <%- include('update',{bookList}) %>
-      <button class="delete">Delete This Book</button>
+      <form action="/delete/<%- bookList.id%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="delete">Delete This Book</button>
+      </form>
+
 
       <p>Title:
         <%- bookList.title %>

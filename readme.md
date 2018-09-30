@@ -47,14 +47,19 @@ CREATE TABLE books (
 09-26-2018 @ 9:30am (DC) - Setup for lab-12 complete
 09-26-2018 @ 10:00am (DC/AF/RM) - Database created with proof of life.
 09-26-2018 @ 11:00am (DC/AF/RM) - Inital display of stored books on index
-09-26-2018 @ 12:45pm (DC) - Inital stucture and coding for details and add app.get processes
+09-26-2018 @ 12:45pm (DC) - Inital structure and coding for details and add app.get processes
 09-26-2018 @ 1:30pm (AF/RM) - Structured pages to include via EJS, worked on design of details.ejs.
 
-9-27-2018 @ 9:50am (DC/AF/RM) - Structures our books/show page to pull information from SQL
-9-27-2018 @ : () 
-9-27-2018 @ : ()
-9-27-2018 @ : ()
+9-27-2018 @ 9:50am (DC/AF/RM) - Structured our books/show page to pull information from SQL
+9-27-2018 @ 11:00pm (AF/DC/RM) - Finished details functionality
+9-27-2018 @ 12:00pm (RM) - Added basic nav functionality
+9-27-2018 @ 1:00pm (DC/AF/RM) - Lab-12 features complete
 
+9-28-2018 @ 12:00pm (AF/RM/DC) - Inital update functionality finished with a few glitches.
+
+9-30-2018 @ 12:00pm (DC) - Fixed two many characters error and modified update process to correctly storew the book data.
+9-30-2018 @ 12:45pm (DC) - Delete book function works as required
+09-30-2018 @ 
 
 ## Credits and Collaborations
 * Front end starter code provided by Samm Hamm and Allie Grampa

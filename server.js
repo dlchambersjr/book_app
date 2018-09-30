@@ -50,8 +50,8 @@ app.use(methodOverride((request, response) => {
 // index.ejs
 app.get('/', startApp);
 
-// Book Details BUtton
-app.get('/book/:id', bookDetails);
+// Book Details Button
+app.get('/book/:detail_id', bookDetails);
 
 // Search Request
 app.get('/new', newSearch);
@@ -61,7 +61,10 @@ app.post('/searches', searchResults);
 app.post('/add', addBook);
 
 // Update Books in database
-app.put('/update/:id', updateBook);
+app.put('/update/:up_id', updateBook);
+
+//Delete a book from the database
+app.delete('/delete/:delete_id', deleteBook);
 
 
 //Set the catch all route
@@ -82,7 +85,7 @@ function Book(info) {
 
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author available';
-  this.isbn = (info.industryIdentifiers[0].identifier.length < 13 ) ? info.industryIdentifiers[1].identifier : info.industryIdentifiers[0].identifier || 'No ISBN available';
+  this.isbn = (info.industryIdentifiers[0].identifier.length < 13) ? info.industryIdentifiers[1].identifier : info.industryIdentifiers[0].identifier || 'No ISBN available';
   this.image_url = info.imageLinks.thumbnail || placeholderImage;
   this.description = info.description;
 }
@@ -125,7 +128,7 @@ function bookDetails(request, response) {
   console.log('DETAIL SECTION STARTED!');
 
   const SQL = 'SELECT * FROM books WHERE id=$1;';
-  const values = [request.params.id];
+  const values = [request.params.detail_id];
 
   client.query(SQL, values)
     .then(result => response.render('pages/books/show', { bookList: result.rows[0] }))
@@ -150,9 +153,9 @@ function addBook(request, response) {
 function updateBook(request, response) {
   console.log('UPDATE BUTTON CLICKED');
 
-  let {title, author, isbn, image_url, description, bookshelf } = request.body;
-  const SQL = 'UPDATE books SET title=$1, author=$2, image_url=$3, isbn=$4, description=$5, bookshelf=$6 WHERE id=$7 RETURNING id;';
-  const values = [title, author, isbn, image_url, description, bookshelf, request.params.id];
+  let { title, author, isbn, image_url, description, bookshelf } = request.body;
+  const SQL = 'UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4,  description=$5, bookshelf=$6 WHERE id=$7 RETURNING id;';
+  const values = [title, author, isbn, image_url, description, bookshelf, request.params.up_id];
   console.log('++++++++++++++++++++++++++');
   console.log(values);
   console.log('++++++++++++++++++++++++++');
@@ -160,7 +163,18 @@ function updateBook(request, response) {
 
   client.query(SQL, values)
     .then(result => response.redirect(`/book/${result.rows[0].id}`))
-  // // .then(console.log(values))
+    // // .then(console.log(values))
+    .catch(err => processErrors(err, response));
+}
+
+function deleteBook(request, response) {
+  console.log('DELETE BUTTON CLICKED');
+
+  const SQL = 'DELETE FROM books WHERE id=$1';
+  const values = [request.params.delete_id];
+
+  client.query(SQL, values)
+    .then(response.redirect('/'))
     .catch(err => processErrors(err, response));
 }
 
