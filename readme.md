@@ -21,6 +21,7 @@ This project uses the following technologies:
 * dotenv: ```npm i dotenv```
 * cors: ```npm i cors```
 * postgres: ```npm i pg ```
+* methodoveride ```npm i method-overide```
 * Deployed live on Heroku at dc-af-rm-booklist.herokuapp.com
 
 ### Database SCHEMA
@@ -59,7 +60,8 @@ CREATE TABLE books (
 
 9-30-2018 @ 12:00pm (DC) - Fixed two many characters error and modified update process to correctly storew the book data.
 9-30-2018 @ 12:45pm (DC) - Delete book function works as required
-09-30-2018 @ 
+09-30-2018 @ (DC) - Added Drop Down functionality for bookshelves
+09.30-2018 @ (DC) - Finished styling
 
 ## Credits and Collaborations
 * Front end starter code provided by Samm Hamm and Allie Grampa

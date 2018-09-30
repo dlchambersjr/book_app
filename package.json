@@ -16,7 +16,7 @@
     "cors",
     "superagent"
   ],
-  "author": "David Chambers and Andy Fieldsy",
+  "author": "David Chambers, Andy Fieldsy, Ryan Milton",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dlchambersjr/book_app/issues"
