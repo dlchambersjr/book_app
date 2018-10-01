@@ -63,6 +63,9 @@
     resize: vertical;
   }
 
+  select {
+    margin-bottom: 25px;
+  }
   footer {
     height:50px;
     background-color: #112d32;
