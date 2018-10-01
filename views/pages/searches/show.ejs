@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-  <%- include('../../layout/head') %>
-
+<%- include('../../layout/head') %>
 
 <body>
-  <h1>Google API Book Results</h1>
-  <%- include('../../layout/nav-bar') %>
-  <ul>
-    <% books.forEach(book => { %>
-      <li>
-    <p><img src="<%-book.image_url%>"></p>
-    <p>Title:
-      <%- book.title %>
-    </p>
-    <p>Author:
-      <%- book.author %>
-    </p>
-    <p>ISBN:
-      <%- book.isbn %>
-    </p>
-    <p>Description:
-      <%- book.description %>
-    </p>
-    <button class="select-button" id="<%- book.isbn %>">Select This Book</button>
-    <%- include('edit',{book}) %>
-  </li>
-    <% }) %>
-  </ul>
+  <%- include('../../layout/header') %>
 
+  <h2>Google API Book Results</h1>
 
-<%- include('../../layout/footer') %>
+    <div class="container">
+      <% books.forEach(book => { %>
+
+      <div class="book-deck">
+
+        <div class="book-image">
+          <img class=image-styl;e" src="<%-book.image_url%>">
+        </div>
+
+        <h3>
+          <%- book.title %>
+        </h3>
+
+        <h4>
+          <%- book.author %>
+        </h4>
+
+        <h4>
+          ISBN:
+          <%- book.isbn %>
+        </h4>
+
+        <p class="detail-description">
+          <%- book.description %>
+        </p>
+
+        <button class="select-button" id="<%- book.isbn %>">Select This Book</button>
+
+        <%- include('edit',{book}) %>
+
+      </div>
+
+      <% }) %>
+    </div>
+
+    <%- include('../../layout/footer') %>
 </body>
 
 </html>

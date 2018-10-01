@@ -130,8 +130,15 @@ function bookDetails(request, response) {
   const SQL = 'SELECT * FROM books WHERE id=$1;';
   const values = [request.params.detail_id];
 
+  const SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
+
   client.query(SQL, values)
-    .then(result => response.render('pages/books/show', { bookList: result.rows[0] }))
+    .then(result => {
+      // const bookList = { bookList: result.rows[0] };
+      return client.query(SQL2)
+        .then(shelves =>
+          response.render('pages/books/show', { bookList: result.rows[0], bookShelves: shelves.rows }))
+    })
     .catch(err => processErrors(err, response));
 }
 

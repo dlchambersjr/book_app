@@ -1,0 +1,85 @@
+header {
+  background-color: #112d32;
+  padding: 10px 0px 0px 10px;
+  display: float;
+  font-family: 'Boogaloo', cursive;
+}
+
+nav {
+
+}
+
+.book-deck {
+  width:80%;
+  margin: 25px auto;
+  padding:20px;
+  background-color: #589cac;
+  text-align: center;
+}
+
+.book-image img {
+  width:50%;
+  box-shadow: 5px 5px 2px black;
+  margin-bottom: 10px;
+}
+
+.book-deck h3 {
+  margin: 0px auto 5px auto;
+  width: 50%;
+}
+
+.book-deck h4 {
+  margin: 0px auto 20px auto;
+  width: 50%;
+}
+
+.detail-description {
+  height: 75px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  font-size: 100%;
+  text-align: justify;
+  line-height: 120%;
+  overflow: auto;
+}
+
+.two-buttons > li {
+  display: inline-block;
+  margin: 0px 5px 0px 5px;
+}
+
+.hide-me {
+  display: none;
+}
+
+form {
+  margin:10px auto;
+}
+
+input[type=text], select, textarea {
+  width: 90%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+fieldset, label {
+ margin:10px;
+}
+
+select {
+  margin-bottom: 25px;
+}
+
+footer {
+  height:50px;
+  background-color: #112d32;
+  font-family: 'Boogaloo', cursive;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+

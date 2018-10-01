@@ -1,14 +1,25 @@
 <form class="hide-me" action="/update/<%- bookList.id %>" method="post" id="<%- bookList.isbn %>" required>
-  <h1>
-    <%- bookList.id%>
-  </h1>
   <input type="hidden" name="_method" value="put">
+
   <input type="text" name="title" value="<%- bookList.title %>" placeholder="Title" required>
+
   <input type="text" name="author" value="<%- bookList.author %>" placeholder="Author" required>
+
   <input type="text" name="isbn" value="<%- bookList.isbn %>" placeholder="ISBN" required>
+
   <input type="text" name="image_url" value="<%- bookList.image_url %>" placeholder="Image URL" required>
+
   <textarea name="description" value="<%- bookList.description %>" placeholder="Description" cols="30" rows="10"
     required><%- bookList.description %>"</textarea>
-  <input type="text" name="bookshelf" value="<%- bookList.bookshelf %>" placeholder="Bookshelf Name" required>
+
+  <select name="bookshelf" placeholder="Bookshelf Name" required>
+    <% bookShelves.forEach(shelf => {%>
+    <option value="<%- shelf.bookshelf%>">
+      <%- shelf.bookshelf%>
+    </option>
+    <% }) %>
+  </select>
+
   <button type="submit">Update DATABASE</button>
+
 </form>

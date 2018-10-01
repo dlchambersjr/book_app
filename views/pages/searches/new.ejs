@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
 
-  <%- include('../../layout/head') %>
-
+<%- include('../../layout/head') %>
 
 <body>
-
-  <div id="body">
-    <h1>Search by Title or Author</h1>
-    <%- include('../../layout/nav-bar') %>
+  <%- include('../../layout/header') %>
+  <h2>Search by Title or Author</h2>
+  <div class="book-deck" id="body">
     <form action="/searches" method="post">
       <input type="text" name="search" placeholder="Enter a title or author" required>
       <fieldset>
-        <label for="title">
-          <span>Title</span>
+        <label for="title">Title
           <input type="radio" name="search" value="title" required>
         </label>
-      </fieldset>
-      <fieldset>
-        <label for="author">
-          <span>Author</span>
+        <label for="author">Author
           <input type="radio" name="search" value="author" required>
         </label>
       </fieldset>
