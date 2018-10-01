@@ -1,6 +1,47 @@
 /* MOBILE SCREEN */
 
 @media only screen and (max-width: 479px) {
+  header {
+    border:1px solid red;
+    background-color: #112d32;
+    font-family: 'Boogaloo', cursive; */
+ }
+
+.book-deck {
+  width:80%;
+  margin: 25px auto;
+  border:1px dashed blue;
+  padding:20px;
+  background-color: #589cac;
+  text-align: center;
+}
+
+.book-image img {
+  width:50%;
+  box-shadow: 5px 5px 2px black;
+  margin-bottom: 10px;
+}
+
+.book-deck h3 {
+  border:1px dotted orange;
+  margin: 0px auto 5px auto;
+  width: 50%;
+}
+
+.book-deck h4 {
+  margin: 0px auto 20px auto;
+  width: 50%;
+}
+
+.hide-me {
+  display: none;
+  
+footer {
+  border:1px solid black;
+  height: 50px
+  }
+
+}
 
 }
 

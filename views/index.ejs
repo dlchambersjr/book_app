@@ -5,25 +5,26 @@
 
 <body>
 
-  <%- include('layout/header') %>
+  <%- include('layout/header', {bookList}) %>
 
   <div id="content">
-
-    <h2>
-      <%- bookList.length %> Saved Books</h2>
   </div>
 
   <% bookList.forEach(book => { %>
-  <div class="books">
-    <p><img src="<%-book.image_url%>"></p>
 
-    <p>Title:
+  <div class="book-deck">
+
+    <div class="book-image">
+      <img class=image-styl;e" src="<%-book.image_url%>">
+    </div>
+
+    <h3>
       <%- book.title %>
-    </p>
+    </h3>
 
-    <p>Author:
+    <h4>
       <%- book.author %>
-    </p>
+    </h4>
 
     <a href="/book/<%- book.id%>">
       <button id="<%- book.id %>">View Details</button>
@@ -33,12 +34,8 @@
 
   <% }) %>
 
-
-
   <%- include('layout/footer')%>
 
 </body>
-
-
 
 </html>
