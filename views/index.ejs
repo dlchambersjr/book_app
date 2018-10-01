@@ -7,33 +7,31 @@
 
   <%- include('layout/header', {bookList}) %>
 
-  <div id="content">
-  </div>
+  <div class="container">
+    <% bookList.forEach(book => { %>
 
-  <% bookList.forEach(book => { %>
+    <div class="book-deck">
 
-  <div class="book-deck">
+      <div class="book-image">
+        <img class=image-styl;e" src="<%-book.image_url%>">
+      </div>
 
-    <div class="book-image">
-      <img class=image-styl;e" src="<%-book.image_url%>">
+      <h3>
+        <%- book.title %>
+      </h3>
+
+      <h4>
+        <%- book.author %>
+      </h4>
+
+      <a href="/book/<%- book.id%>">
+        <button id="<%- book.id %>">View Details</button>
+      </a>
+
     </div>
 
-    <h3>
-      <%- book.title %>
-    </h3>
-
-    <h4>
-      <%- book.author %>
-    </h4>
-
-    <a href="/book/<%- book.id%>">
-      <button id="<%- book.id %>">View Details</button>
-    </a>
-
+    <% }) %>
   </div>
-
-  <% }) %>
-
   <%- include('layout/footer')%>
 
 </body>

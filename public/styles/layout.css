@@ -2,39 +2,5 @@
 
 @media screen and (max-width: 479px) {
 
-
-#content {
+}
   
-}
-
-.books{
-  /* margin-bottom: 50px;  */
-}
-
-form {
-   
-  /* padding: 20px; */
-  
-}
-
-h1 {
-  /* text-align: center; */
-}
-
-input, button {
-  /* font-size: 15px; */
-}
-
-span {
-  /* outline: 1px solid #112D32;
-  padding: 5px 20px;
-  background-color: #88BDBC; */
-}
-
-
-
-
-/* TABLET AND DESKTOP */
-@media screen and (min-width: 480px) {
-
-}

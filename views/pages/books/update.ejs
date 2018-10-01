@@ -1,7 +1,4 @@
 <form class="hide-me" action="/update/<%- bookList.id %>" method="post" id="<%- bookList.isbn %>" required>
-  <h1>
-    <%- bookList.id%>
-  </h1>
   <input type="hidden" name="_method" value="put">
   <input type="text" name="title" value="<%- bookList.title %>" placeholder="Title" required>
   <input type="text" name="author" value="<%- bookList.author %>" placeholder="Author" required>
@@ -10,5 +7,8 @@
   <textarea name="description" value="<%- bookList.description %>" placeholder="Description" cols="30" rows="10"
     required><%- bookList.description %>"</textarea>
   <input type="text" name="bookshelf" value="<%- bookList.bookshelf %>" placeholder="Bookshelf Name" required>
+
+
   <button type="submit">Update DATABASE</button>
+
 </form>
