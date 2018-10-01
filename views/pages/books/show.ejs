@@ -7,13 +7,15 @@
 <body>
   <%- include('../../layout/header')%>
 
+  <!-- Dummy fix for saved books total -->
+  <h2>Book Details</h2>
 
   <ul>
     <li>
       <div class="book-deck">
 
         <div class="book-image">
-          <img class=image-styl;e" src="<%-bookList.image_url%>">
+          <img class="image-style" src="<%-bookList.image_url%>">
         </div>
 
         <h3>
@@ -38,7 +40,6 @@
           <li>
             <button class="select-button" id="<%- bookList.isbn %>">UPDATE Book</button>
             <%- include('update',{bookList, bookShelves}) %>
-
           </li>
 
           <li>

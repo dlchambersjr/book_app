@@ -7,6 +7,10 @@
 
   <%- include('layout/header', {bookList}) %>
 
+  <h2>
+    <%- bookList.length %> - Saved Books
+  </h2>
+
   <div class="container">
     <% bookList.forEach(book => { %>
 

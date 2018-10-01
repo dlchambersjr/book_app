@@ -1,8 +1,9 @@
-a:link, a:visited {
+a, a:link, a:active {
   text-decoration: none;
   color: white;
 }
 
-a:active, a:hover {
-  text-decoration: underline;
+a:hover {
+  text-decoration: none;
+  color: yellow;
 }
