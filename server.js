@@ -43,45 +43,29 @@ app.use(methodOverride((request, response) => {
   }
 }))
 
-// ++++++++++++++++
-// Routes to listen
-// ++++++++++++++++
-
-// index.ejs
+// ++++++ Routes ++++++
 app.get('/', startApp);
-
-// Book Details Button
 app.get('/book/:detail_id', bookDetails);
-
-// Search Request
 app.get('/new', newSearch);
-app.post('/searches', searchResults);
 
-// Add Books to the database
+app.post('/searches', searchResults);
 app.post('/add', addBook);
 
-// Update Books in database
 app.put('/update/:up_id', updateBook);
 
-//Delete a book from the database
 app.delete('/delete/:delete_id', deleteBook);
 
-
-//Set the catch all route
 app.get('*', (request, response) => response.status(404).render('pages/404-error.ejs'));
 
 // Activate the server
 app.listen(PORT, () => console.log(`(Book-App) listening on: ${PORT}`));
 
 
-// +++++++++++++++++++++++++++++++++
-// Helper functions
-// +++++++++++++++++++++++++++++++++
+// +++++ Helper functions +++++
 
-
-// Constructor to build our book instances
+// Constructor to build the book instances
 function Book(info) {
-  const placeholderImage = 'http://www.newyorkpaddy.com/images/covers/NoCoverAvailable.jpg';
+  const placeholderImage = 'https://upload.wikimedia.org/wikipedia/en/0/08/NoBookCoverImage.jpg';
 
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author available';
@@ -107,14 +91,11 @@ function newSearch(request, response) {
 function searchResults(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-  console.log(request.body);
-
   if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
   if (request.body.search[1] === 'author') { url += `+inauthor:${request.body.search[0]}`; }
-  console.log(url);
+
   superagent.get(url)
     .then(bookList => bookList.body.items.map(book => {
-      console.log(book.volumeInfo.industryIdentifiers[1]);
       return new Book(book.volumeInfo);
     }))
     .then(bookList => {
@@ -125,16 +106,12 @@ function searchResults(request, response) {
 
 // Retrieve the details of a book
 function bookDetails(request, response) {
-  console.log('DETAIL SECTION STARTED!');
-
   const SQL = 'SELECT * FROM books WHERE id=$1;';
   const values = [request.params.detail_id];
-
   const SQL2 = 'SELECT DISTINCT bookshelf FROM books;';
 
   client.query(SQL, values)
     .then(result => {
-      // const bookList = { bookList: result.rows[0] };
       return client.query(SQL2)
         .then(shelves =>
           response.render('pages/books/show', { bookList: result.rows[0], bookShelves: shelves.rows }))
@@ -144,10 +121,7 @@ function bookDetails(request, response) {
 
 //Add a book to the database
 function addBook(request, response) {
-  console.log('ADD BUTTON CLICKED!');
-
   let { title, author, isbn, image_url, description, bookshelf } = request.body;
-
   const SQL = 'INSERT INTO books (title, author, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   const values = [title, author, isbn, image_url, description, bookshelf];
 
@@ -158,25 +132,16 @@ function addBook(request, response) {
 
 //Update a books details to the database
 function updateBook(request, response) {
-  console.log('UPDATE BUTTON CLICKED');
-
   let { title, author, isbn, image_url, description, bookshelf } = request.body;
   const SQL = 'UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4,  description=$5, bookshelf=$6 WHERE id=$7 RETURNING id;';
   const values = [title, author, isbn, image_url, description, bookshelf, request.params.up_id];
-  console.log('++++++++++++++++++++++++++');
-  console.log(values);
-  console.log('++++++++++++++++++++++++++');
-
 
   client.query(SQL, values)
     .then(result => response.redirect(`/book/${result.rows[0].id}`))
-    // // .then(console.log(values))
     .catch(err => processErrors(err, response));
 }
 
 function deleteBook(request, response) {
-  console.log('DELETE BUTTON CLICKED');
-
   const SQL = 'DELETE FROM books WHERE id=$1';
   const values = [request.params.delete_id];
 
@@ -185,11 +150,7 @@ function deleteBook(request, response) {
     .catch(err => processErrors(err, response));
 }
 
-
-
 // Error Handler
 function processErrors(error, response) {
   response.render('pages/error', { errorResult: error })
 }
-
-
