@@ -66,3 +66,4 @@ CREATE TABLE books (
 ## Credits and Collaborations
 * Front end starter code provided by Samm Hamm and Allie Grampa
 * Utilizes outside API from Google Books
+* "No book cover" Art is licensed under Wiki Commons.
